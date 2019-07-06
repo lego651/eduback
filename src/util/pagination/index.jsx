@@ -6,8 +6,8 @@ import 'rc-pagination/dist/rc-pagination.min.css'
 class Pagination extends React.Component {
     constructor(props){
       super(props)
-
     }
+
     render() {
       return (
         <div className="row">
