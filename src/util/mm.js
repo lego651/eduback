@@ -36,7 +36,10 @@ class MUtil {
     return result ? decodeURIComponent(result[2]) : null
   }
   errorTips(errMsg) {
-    alert(errMsg || 'something wrong...')
+    alert(errMsg || 'something wrong...');
+  }
+  successTips(successMsg) {
+    alert(successMsg || '操作成功');
   }
   setStorage(name, data) {
     let dataType = typeof data;
