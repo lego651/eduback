@@ -1,12 +1,28 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import MUtil from 'util/mm.js'
+import User from 'service/user-service.jsx'
+
+const _mm = new MUtil()
+const _user = new User()
+
 class TopNav extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      username: _mm.getStorage('userInfo').username || ''
+    }
   }
   onLogout() {
-
+    _user.logout()
+    .then(res => {
+      _mm.removeStorage('userInfo');
+      // this.props.history.push('/login');
+      window.location.href = '/login';
+    }, errMsg => {
+      _mm.errorTips(errMsg);
+    })
   }
   render() {
     return (
@@ -19,7 +35,7 @@ class TopNav extends React.Component {
                 <li className="dropdown">
                     <a className="dropdown-toggle" data-toggle="dropdown" href="javascript:;" aria-expanded="false">
                         <i className="fa fa-envelope fa-fw"></i>
-                        <span> Welcome, admin </span>
+                        <span> Welcome, {this.state.username} </span>
                         <i className="fa fa-caret-down"></i>
                     </a>
                     <ul className="dropdown-menu dropdown-messages">
